@@ -1,0 +1,6 @@
+@CourseFlow.API_HostAddress = http://localhost:5191
+
+GET {{CourseFlow.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

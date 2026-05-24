@@ -1,0 +1,15 @@
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\bin\Debug\net10.0\CourseFlow.Application.deps.json
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\bin\Debug\net10.0\CourseFlow.Application.dll
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\bin\Debug\net10.0\CourseFlow.Application.pdb
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\bin\Debug\net10.0\CourseFlow.Domain.dll
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\bin\Debug\net10.0\CourseFlow.Domain.pdb
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\CourseFlow.Application.csproj.AssemblyReference.cache
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\CourseFlow.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\CourseFlow.Application.AssemblyInfoInputs.cache
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\CourseFlow.Application.AssemblyInfo.cs
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\CourseFlow.Application.csproj.CoreCompileInputs.cache
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\CourseFl.5BC1EF6E.Up2Date
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\CourseFlow.Application.dll
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\refint\CourseFlow.Application.dll
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\CourseFlow.Application.pdb
+C:\Users\sumeet.kulkarni\Docs\Pro\CourseFlow\API\CourseFlow.Application\obj\Debug\net10.0\ref\CourseFlow.Application.dll
