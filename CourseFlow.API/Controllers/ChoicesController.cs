@@ -1,11 +1,15 @@
 ﻿using CourseFlow.Application.DTOs;
 using CourseFlow.Application.Interfaces.QuestionsChoice;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
 
 namespace CourseFlow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Read")]
+    [Authorize]
     public class ChoicesController : ControllerBase
     {
         private readonly IChoiceService _service;
@@ -29,6 +33,8 @@ namespace CourseFlow.API.Controllers
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> CreateChoice([FromBody] CreateChoiceDto dto)
         {
             await _service.AddChoiceAsync(dto);
@@ -36,6 +42,8 @@ namespace CourseFlow.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> UpdateChoice(int id, [FromBody] UpdateChoiceDto dto)
         {
             await _service.UpdateChoiceAsync(id, dto);
@@ -43,6 +51,8 @@ namespace CourseFlow.API.Controllers
         }
 
         [HttpPatch("{id}")]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> UpdateUserChoice(int id, [FromBody] UpdateUserChoice dto)
         {
             await _service.UpdateUserChoiceAsync(id, dto);
@@ -50,6 +60,8 @@ namespace CourseFlow.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> DeleteChoice(int id)
         {
             await _service.DeleteChoiceAsync(id);

@@ -42,10 +42,10 @@ namespace CourseFlow.Application.Services
             return await _courseRepository.IsTitleDuplicateAsync(title);
         }
 
-        public async Task AddCourseAsync(CreateCourseDto createCourseDto)
+        public async Task AddCourseAsync(CreateCourseDto createCourseDto, int createdByUserId)
         {
             var course = _mapper.Map<Course>(createCourseDto);
-            course.CreatedBy = 1; 
+            course.CreatedBy = createdByUserId;
             course.CreatedOn = DateTime.UtcNow;
 
             await _courseRepository.AddCourseAsync(course);

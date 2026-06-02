@@ -3,6 +3,8 @@ using CourseFlow.Application.Interfaces.Courses;
 using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
+using Serilog;
 
 namespace CourseFlow.API.Controllers
 {
@@ -30,13 +32,13 @@ namespace CourseFlow.API.Controllers
         /// <returns>A list of courses.</returns>
         /// <response code="200">Returns the list of courses.</response>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<CourseDto>), StatusCodes.Status200OK)]        
+        [ProducesResponseType(typeof(IEnumerable<CourseDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
-        {            
+        {
             var mainCourses = new List<string> { "Angular", ".NET Core", "Azure" };
             var model = await _service.GetAllCoursesAsync();
 
@@ -66,7 +68,7 @@ namespace CourseFlow.API.Controllers
         /// <response code="404">If the course is not found.</response>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(CourseDto), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]        
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -86,10 +88,11 @@ namespace CourseFlow.API.Controllers
         /// <response code="400">If the input is invalid.</response>
         [HttpPost]
         [ProducesResponseType(typeof(CreateCourseDto), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(IEnumerable<FluentValidation.Results.ValidationFailure>), StatusCodes.Status400BadRequest)]        
+        [ProducesResponseType(typeof(IEnumerable<FluentValidation.Results.ValidationFailure>), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
         public async Task<IActionResult> CreateCourse([FromBody] CreateCourseDto createCourseDto)
         {
             var validationResult = await validator.ValidateAsync(createCourseDto);
@@ -99,7 +102,13 @@ namespace CourseFlow.API.Controllers
                 return BadRequest(validationResult.Errors);
             }
 
-            await _service.AddCourseAsync(createCourseDto);
+            //var currentUser = await currentUserService.GetCurrentUserProfileAsync();
+            //if (currentUser is null)
+            //{
+            //    return Unauthorized("Current user was not found in UserProfile.");
+            //}
+
+            //await _service.AddCourseAsync(createCourseDto, currentUser.UserId);
             return CreatedAtAction(nameof(GetCourse), new { id = createCourseDto.Title }, createCourseDto);
         }
 
@@ -117,6 +126,7 @@ namespace CourseFlow.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
         public async Task<IActionResult> UpdateCourse(int id, [FromBody] UpdateCourseDto updateCourseDto)
         {
             var validationResult = await updateValidator.ValidateAsync(updateCourseDto);
@@ -141,6 +151,7 @@ namespace CourseFlow.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
             await _service.DeleteCourseAsync(id);
@@ -159,6 +170,7 @@ namespace CourseFlow.API.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
         public async Task<IActionResult> UpdateDescription([FromRoute] int id, [FromBody] CourseUpdateDescriptionDto model)
         {
             await _service.UpdateDescriptionAsync(id, model.Description);

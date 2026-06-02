@@ -1,5 +1,4 @@
-﻿
-using CourseFlow.Domain.Entities;
+﻿using CourseFlow.Domain.Entities;
 
 namespace CourseFlow.Application.Interfaces.Courses
 {

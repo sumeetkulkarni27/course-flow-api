@@ -12,6 +12,12 @@
 	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
     <PackageReference Include="NSwag.AspNetCore" Version="14.7.1" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.AzureAppServices" Version="10.0.8" />
+	  <PackageReference Include="Microsoft.Identity.Web" Version="4.10.0" />
+	  <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+	  <PackageReference Include="Serilog.Expressions" Version="5.0.0" />
+	  <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.0" />
+	  <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>

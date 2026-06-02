@@ -1,11 +1,17 @@
 ﻿using CourseFlow.Application.DTOs;
 using CourseFlow.Application.Interfaces.QuestionsChoice;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
+
 
 namespace CourseFlow.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Read")]
+    [Authorize]
     public class QuestionsController : ControllerBase
     {
         private readonly IQuestionService _service;
@@ -25,10 +31,13 @@ namespace CourseFlow.API.Controllers
         public async Task<ActionResult<QuestionDto>> GetQuestion(int id)
         {
             var question = await _service.GetQuestionByIdAsync(id);
+
             return question == null ? NotFound() : Ok(question);
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> CreateQuestion([FromBody] CreateQuestionDto dto)
         {
             await _service.AddQuestionAsync(dto);
@@ -36,6 +45,8 @@ namespace CourseFlow.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> UpdateQuestion(int id, [FromBody] UpdateQuestionDto dto)
         {
             await _service.UpdateQuestionAsync(id, dto);
@@ -43,6 +54,8 @@ namespace CourseFlow.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> DeleteQuestion(int id)
         {
             await _service.DeleteQuestionAsync(id);
@@ -51,6 +64,8 @@ namespace CourseFlow.API.Controllers
 
 
         [HttpPost("CreateQuestionChoices")]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> CreateQuestionChoices([FromBody] QuestionDto dto)
         {
             var createdResource = await _service.AddQuestionAndChoicesAsync(dto);
@@ -58,6 +73,8 @@ namespace CourseFlow.API.Controllers
         }
 
         [HttpPut("UpdateQuestionAndChoices/{id}")]
+        [RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes:Write")]
+        [Authorize]
         public async Task<IActionResult> UpdateQuestionAndChoices(int id, [FromBody] QuestionDto dto)
         {
             await _service.UpdateQuestionAndChoicesAsync(id, dto);
