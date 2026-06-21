@@ -19,7 +19,8 @@
     public class StartExamRequest
     {
         public int CourseId { get; set; }
-        public int UserId { get; set; }
+        public bool IsPracticeMode { get; set; } = true;
+        public int NoOfQuestions { get; set; } = 10;
     }
 
     public class UserExamQuestionsDto : UpdateUserQuestionChoiceDto

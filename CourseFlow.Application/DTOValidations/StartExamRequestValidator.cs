@@ -9,8 +9,6 @@ namespace CourseFlow.Application.DTOValidations
         {
             RuleFor(x => x.CourseId).GreaterThan(0).WithMessage("CourseId must be greater than 0.");
             
-            RuleFor(x => x.UserId).GreaterThan(0).WithMessage("UserId must be greater than 0.");
-
             /*
              Pending validations for StartExamRequest.
                 1. incoming CourseId should be validated against the existing courses in DB
